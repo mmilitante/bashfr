@@ -3,7 +3,7 @@
 # mysql settings
 MYSQL_HOSTNAME="localhost"
 MYSQL_USERNAME="root"
-MYSQL_PASSWORD="-pmike6629"		# if protected, place here, example: MYSQL_PASSWORD="-punbreakable"
+MYSQL_PASSWORD="-p"		# if protected, place here, example: MYSQL_PASSWORD="-punbreakable"
 MYSQL_DATABASE="friendster"
 
 # mysql strings
