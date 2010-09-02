@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# url constants
+URL_BASE="http://www.friendster.com"
+URL_LOGIN="$URL_BASE/login.php"
+URL_PROFILE="http://profiles.friendster.com"
+URL_WIDGETS="http://widgets.friendster.com"
+URL_WIDGET_ADD="$URL_BASE/widget_add.php"
+URL_WIDGET_MANAGE="$URL_BASE/developer/widget_manage.php"
+URL_WIDGET_INFO="$URL_BASE/developer/widget_info.php"
+URL_REG_NEW_PHOTO="$URL_BASE/regnewphoto.php"
+URL_VIEWALBUMS_DELETE="$URL_BASE/viewalbums.php?action=delete&confirm=1&p=1&a=0"
+URL_EDIT_PROFILE="$URL_BASE/editprofile.php"
+URL_JOIN="$URL_BASE/join.php"
+URL_EDITACCOUNT="$URL_BASE/editaccount.php"
+URL_EDITACCOUNT_TAB_NOTIFY="$URL_EDITACCOUNT?tab=notify";
+
+# regex
+

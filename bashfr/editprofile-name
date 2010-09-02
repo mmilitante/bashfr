@@ -1,0 +1,52 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+
+lastname=$1; shift
+firstname=$1; shift
+maidenname=$1; shift
+
+birthmonth=$1; shift # 04
+birthday=$1; shift # 10
+birthyear=$1; shift # 1993
+gender=$1; shift # f
+
+#authcode=aedfa2c63901ce6d69b44a3922bf44 -F form_id=prof_basic -F firstname=firsname -F lastname=lastname -F maidenname=maidenname -F birthmonth=01 -F birthday=01 -F birthyear=1993 -F gender=f -F heretohelp=y -F status=2 -F Submit=Save
+#authcode=aedfa2c63901ce6d69b44a3922bf44 -F form_id=prof_loc -F country=PH -F region= -F city= -F userlocid=0 -F structured=1 -F hometown=hometown -F Submit=Save
+#authcode=aedfa2c63901ce6d69b44a3922bf44 -F form_id=prof_work -F occupation=occupation -F company=companies -F affiliation=affiliations -F Submit=Save
+#authcode=aedfa2c63901ce6d69b44a3922bf44 -F form_id=prof_aboutme -F interests=interest -F favoritebooks=books -F favoritemovies=movies -F favoritemusic=music -F favoritetv=shows -F aboutme=about -F inputcount_about_me=4995 -F wanttomeet=who -F inputcount_meet=4997 -F Submit=Save
+
+#<< comment
+lastname=`echo ${lastname// /\.}`
+firstname=`echo ${firstname// /\.}`
+maidenname=`echo ${maidenname// /\.}`
+
+lastname=`echo ${lastname,}`
+firstname=`echo ${firstname,}`
+maidenname=`echo ${maidenname,}`
+#comment
+
+result=`bash page-browse $username $password $URL_EDIT_PROFILE -L`
+
+authcode=`echo $result | grep -o -P 'name="authcode" value="(.+?)"'`
+authcode=`echo ${authcode#*value=\"}`
+for i in {1..20}
+{
+	authcode=`echo ${authcode%\"*}`
+}
+
+birthday=`$MYSQL_STRING -N -e "select day(now());"`
+birthmonth=`$MYSQL_STRING -N -e "select month(now());"`
+birthyear=`$MYSQL_STRING -N -e "select year(now())-19;"`
+
+#curl_editprofile="-F authcode=$authcode -F form_id=prof_basic -F firstname=$firstname -F lastname=$lastname -F maidenname=$maidenname -F birthmonth=$birthmonth -F birthday=$birthday -F birthyear=$birthyear -F gender=f -F heretohelp=y -F status=2 -F Submit=Save"
+curl_editprofile="-F authcode=$authcode -F form_id=prof_basic -F firstname=${firstname:-$DEFAULT_FIRSTNAME} -F lastname=${lastname:-$DEFAULT_LASTNAME} -F maidenname=${maidenname:-$DEFAULT_MAIDENNAME} -F birthmonth=${birthmonth:-$DEFAULT_BIRTHMONTH} -F birthday=${birthday:-$DEFAULT_BIRTHDAY} -F birthyear=${birthyear:-$DEFAULT_BIRTHYEAR} -F gender=${gender:-$DEFAULT_GENDER} -F heretohelp=y -F status=2 -F Submit=Save"
+
+result=`bash page-browse $username $password $URL_EDIT_PROFILE $curl_editprofile -L`
+
+#curl_editprofile="-F authcode=$authcode -F form_id=prof_loc -F country=PH -F region= -F city= -F userlocid=0 -F structured=1 -F hometown= -F Submit=Save"
+#result=`bash page-browse $username $password $URL_EDIT_PROFILE $curl_editprofile -L`

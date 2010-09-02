@@ -1,0 +1,26 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+photos=$@; shift
+
+cookies=$username
+
+#result=`bash user-login $username $password`
+result=`bash page-browse $username $password $URL_VIEWALBUMS_DELETE --head`
+result=`bash page-browse $username $password $URL_REG_NEW_PHOTO -L`
+
+uid=`echo $result | grep -oP 'name="uid" value="(.+?)"'`
+uid=`echo ${uid#*value=\"}`
+uid=`echo ${uid%\"}`
+
+for photo in $photos
+{
+	curl_regnewphoto="-F _submitted=1 -F MAX_FILE_SIZE=10485760 -F uid=$uid -F photo=@$photo -F caption="
+	result=`bash page-browse $username $password $URL_REG_NEW_PHOTO $curl_regnewphoto`
+}
+
+

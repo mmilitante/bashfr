@@ -1,0 +1,25 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+
+cookies=$username
+
+curl_login="-F _submitted=1 -F next=/ -F tzoffset=-480 -F email=$username -F password=$password -F rememberme=on"
+
+result=`curl $DEBUG_MODE $URL_LOGIN $curl_login -c $cookies`
+
+errorbox=`echo $result | grep -oP '<div class="errorbox">.+?<div class="boxcontent">(.+?)</div></div>'`
+
+status=`echo ${errorbox#*boxcontent\">}`
+
+for i in {1..10}
+{
+	status=`echo ${status%<*>}`
+}
+
+$MYSQL_STRING -e "insert into bots (email, password, status) values ('$username', '$password', '$status') on duplicate key update status = '$status', password = '$password', updated = now();"
+

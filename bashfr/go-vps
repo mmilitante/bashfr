@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source settings
+
+instance_browser=$1; shift
+instance_installer=$1; shift
+
+cd $DIR_SCRIPTS
+
+for (( i=1; i<=instance_browser; i++ ))
+do
+	bash uid-browser > /dev/null &
+done
+
+for (( i=1; i<=instance_installer; i++ ))
+do
+	bash widget-installer > /dev/null &
+done

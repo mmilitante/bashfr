@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# mysql settings
+MYSQL_HOSTNAME="localhost"
+MYSQL_USERNAME="root"
+MYSQL_PASSWORD="-pmike6629"		# if protected, place here, example: MYSQL_PASSWORD="-punbreakable"
+MYSQL_DATABASE="friendster"
+
+# mysql strings
+MYSQL_BINARY="mysql"
+MYSQL_STRING="$MYSQL_BINARY -h$MYSQL_HOSTNAME -u$MYSQL_USERNAME $MYSQL_PASSWORD $MYSQL_DATABASE"
+
+# retry settings
+MAX_ERRORS=3
+ERRORS=0
+
+# sleep settings
+SLEEP_WIDGET_INSTALLER="2h"
+
+# directories
+DIR_SCRIPTS="/home/mike/bashfr"
+DIR_PICTURES="/home/mike/larawan"
+
+# debug
+
+#  -v/--verbose       Make the operation more talkative
+#  -s/--silent        Silent mode. Don't output anything
+
+DEBUG_MODE="--verbose"
+
+
+# automation
+
+# place your "true" verify email url here, just once, but don't register it, you can use mine:
+# URL_VERIFY="http://www.friendster.com/join.php?verify=31347&id=rEISZc5cLcjQ_l6tMW5tARiYTr_96aKohm5r40Z4R1I*"
+URL_VERIFY="http://www.friendster.com/join.php?verify=22089&id=gk2QDSFJHBEmr8VhMXiZYnORmSrlAv3g6iVS_6rzl2Y*"
+DEFAULT_FIRSTNAME="$1" 
+DEFAULT_LASTNAME="$1" 
+DEFAULT_BIRTHMONTH="04" 
+DEFAULT_BIRTHDAY="01" 
+DEFAULT_BIRTHYEAR="1993" 
+DEFAULT_GENDER="f" 
+DEFAULT_COUNTRY="PH" 
+DEFAULT_MOBILEPHONE="+63"
+
+DEFAULT_MAIDENNAME="$1"
+
+PREFERRED_DOMAIN="yahoo.com"
+
+FILE_BOTS_INSTALLER="bots-installer.txt"
+FILE_BOTS_CRAWLER="bots-crawler.txt"

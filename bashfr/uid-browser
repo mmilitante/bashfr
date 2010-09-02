@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source settings
+source constants
+
+while [ 0 ]
+do
+	result=`$MYSQL_STRING -N -e "select email from bots where type='crawler' and status = '' order by rand();"`
+
+	for email in $result
+	{
+		password=`$MYSQL_STRING -N -e "select password from bots where email = '$email';"`
+		#uid=`$MYSQL_STRING -N -e "select cast((rand() * 100000000) + rand() * 10000000 + rand() * 1000000 as unsigned integer);"`
+		uid=`$MYSQL_STRING -N -e "select cast(rand() * 100000000 + rand() * 10000000 + rand() * 1000000 + rand() * 1000000 + rand() * 100000 + rand() * 1000000 + rand() * 1000000 + rand() * 1000000 + rand() * 1000000 + rand() * 1000000 + rand() * 1000000 as unsigned integer);"`
+		bash profile-browse $email $password $uid
+	}
+done
+

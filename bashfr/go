@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source settings
+
+instance_browser=$1; shift
+instance_installer=$1; shift
+
+command="gnome-terminal "
+
+for (( i=1; i<=instance_browser; i++ ))
+do
+	command="$command --tab --maximize --working-directory $DIR_SCRIPTS -e \"./uid-browser\" -t browser$i"
+done
+
+for (( i=1; i<=instance_installer; i++ ))
+do
+	command="$command --tab --maximize --working-directory $DIR_SCRIPTS -e \"./widget-installer\" -t installer$i"
+done
+
+$command

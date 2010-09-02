@@ -1,0 +1,51 @@
+# crawler
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+('email',		'nacchan', 'link' ,  'crawler', '1'), /*stolen*/
+
+# installer
+
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+('email',		'nacchan', 'installer', '1'),
+
+# apps
+http://tekgame.googlecode.com/svn-history/r15/trunk/tekgame/opensocial.xml
+http://tekgame.googlecode.com/svn-history/r18/trunk/tekgame/opensocial.xml
+http://graargh.returnstrue.com/buh/dafos-development.xml
+http://github.com/febuiles/opensocial-examples/raw/7ab174b2169ac7f1c5c27264c471c79c2b4c91d2/helloword.xml/
+http://osda.appspot.com/gadget/osda-gmail.xml
+
+# mike's
+http://profiles.friendster.com/107033126
+http://profiles.friendster.com/117689712
+
+# jewin's
+http://profiles.friendster.com/111798494
+
+# melvin's
+
+# someone else's
+http://iphoneapp.110mb.com/friendster.xml
+http://174.123.125.63/googleads.xml
+http://ofw.site90.com/xml/sample.xml
+
+http://profiles.friendster.com/115355541
+reychellesolis@yahoo.com
+

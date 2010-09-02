@@ -1,0 +1,31 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+appnames=$@; shift
+
+cookies=$username
+
+for appname in $appnames
+{
+	result=`bash page-browse $username $password $URL_WIDGETS/$appname -L`
+
+	api_key=`echo $result | grep -o -P 'name="api_key" value="(.+?)"'`
+	api_key=`echo ${api_key#*value=\"}`
+	api_key=`echo ${api_key%\"}`
+
+	authcode=`echo $result | grep -o -P 'name="authcode" value="(.+?)"'`
+	authcode=`echo ${authcode#*value=\"}`
+	authcode=`echo ${authcode%\"}`
+
+	curl_widget_add="-F AddToProfile=On -F authcode=$authcode -F api_key=$api_key -F src=directory -F src_user_id= -F next=";
+
+	result=`bash page-browse $username $password $URL_WIDGET_ADD $curl_widget_add -L`
+
+	ERRORS=0
+}
+
+

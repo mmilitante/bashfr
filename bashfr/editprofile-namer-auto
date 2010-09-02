@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source settings
+source constants
+
+crawler_emails=`$MYSQL_STRING -N -e "select email from bots where type='crawler' and status = '';"`
+
+for crawler_email in $crawler_emails
+{
+	crawler_password=`$MYSQL_STRING -N -e "select password from bots where email = '$crawler_email';"`
+	bash editprofile-namer $crawler_email $crawler_password
+}

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+source settings
+source constants
+
+bots=${1:-"1"}; shift
+isinstaller=$1; shift
+batch=$1; shift
+
+for (( i=1; i<=bots; i++ ))
+do
+	username=`$MYSQL_STRING -N -e "select concat(md5(now()),'@$PREFERRED_DOMAIN');"`
+	password=`$MYSQL_STRING -N -e "select hex(crc32('$username'));"`
+
+	result=`bash account-maker $username $password`
+
+	uid=`echo $result | grep -o -P 'var pageOwnerID = "(.+?)"'`
+	uid=`echo ${uid#*var pageOwnerID = \"}`
+	uid=`echo ${uid%\"}`
+
+	if [ $uid ]
+	then
+		if [ $isinstaller -eq "1" ]
+		then
+			echo "('$username',	'$password', 	'installer', 	'$batch'), /*generated*/" >> $FILE_BOTS_INSTALLER
+		else
+			echo "('$username',	'$password',	'http://profiles.friendster.com/$uid',	'crawler', '$batch'), /*generated*/" >> $FILE_BOTS_CRAWLER
+		fi
+	fi
+done
+

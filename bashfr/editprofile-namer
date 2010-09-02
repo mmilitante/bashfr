@@ -1,0 +1,19 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+
+firstnames=("Charina" "Daniela" "Ruby" "Chichi" "Emma" "Mary" "Jazzmine" "Maybell" "Melanie" "Maricris" "Angel" "Nicole" "Angelica" "Angela" "Jasmine" "Mary Joy" "Kimberly" "Mariel" "Mary Grace" "Princess" "Sarah" "Maria" "Karla" "Jessa" "Carol" "Roxanne")
+secondnames=("Rhonalyn" "Quennie" "Vaneza" "Grace" "Shiela" "Sophia" "Emily" "Chloe" "Tiffany" "Angela" "Ashley" "Rachel" "Isabella" "Fiona" "Jessica" "Sarah" "Melissa" "Lala" "Joy" "Cristine" "Cristina" "Julita" "Juliet")
+middlenames=("Acosta" "Santos" "Reyes" "Cruz" "Bautista" "Abuel" "Ocampo" "García" "Mendoza" "Tomás" "Andrada" "Castillo" "Flores" "Villanueva" "Ramos" "Castro" "Rivera" "Aquino" "Navarro" "Salazar" "Mercado" "Concepción" "Santiago" "Lopez" "de la Cruz" "de la Reyes" "del Rosario" "de los Santos" "de Guzmán" "de Castro" "de la Vega" "de la Rosa" "de Asis" "de Rosales" "González" "López" "Hernández" "Pérez" "Fernández" "Ramírez" "Dominguez" "Enriquez" "Álvarez" "Sánchez")
+lastnames=("Ramos" "StaMaria" "DelaFuente" "Abello" "Abrigo" "Acebo" "Acuin" "Adamos" "Aboy" "Banawa" "Bamba" "Barba" "Balisi" "Cabrera" "Calapan" "Calicdan" "Abanilla" "Santos" "Reyes" "Cruz" "Bautista" "Ocampo" "García" "Mendoza" "Tomás" "Andrada" "Castillo" "Flores" "Villanueva" "Ramos" "Castro" "Rivera" "Aquino" "Navarro" "Salazar" "Mercado" "Concepción" "Santiago" "Lopez" "de la Cruz" "de la Reyes" "del Rosario" "de los Santos" "de Guzmán" "de Castro" "de la Vega" "de la Rosa" "de Asis" "de Rosales" "González" "López" "Hernández" "Pérez" "Fernández" "Ramírez" "Dominguez" "Enriquez" "Álvarez" "Sánchez" "Silva" "Santos" "Oliveira" "Souza" "Pereira" "Costa" "Carvalho" "Cavalcanti" "Gonçalves" "Almeida" "Ferreira" "Ribeiro" "Rodrigues" "Gomes" "Lima" "Martins" "Rocha" "Alves" "Araújo" "Pinto" "Barbosa" "Castro" "Fernandes" "Melo" "Marchi" "Azevedo" "Barros" "Cardoso" "Correia" "Cunha" "Dias")
+
+f=`$MYSQL_STRING -N -e "select cast(rand() * ${#firstnames[*]} as unsigned integer);"`
+s=`$MYSQL_STRING -N -e "select cast(rand() * ${#secondnames[*]} as unsigned integer);"`
+m=`$MYSQL_STRING -N -e "select cast(rand() * ${#middlenames[*]} as unsigned integer);"`
+l=`$MYSQL_STRING -N -e "select cast(rand() * ${#lastnames[*]} as unsigned integer);"`
+
+bash editprofile-name $username $password  "${lastnames[$l]}" "${firstnames[$f]} ${secondnames[$s]}" "${middlenames[$m]}"

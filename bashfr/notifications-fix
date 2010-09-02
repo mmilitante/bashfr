@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+
+curl_notify="-F messagedepth=0 -F profiledepth=0 -F email=$username -F _submitted=1 -F FriendAlerts=0 -F EntityAlerts=0 -F BookmarkAlerts=0 -F GroupAlerts=0 -F ClassmateAlerts=0 -F weeklyupdates=n -F messageEmailsFrom=1 -F ReceiveAppInvitesOptOut=1 -F ReceiveRecommendations=0 -F ReceiveBulletinNotifications=0 -F notifications=n -F ReceiveFriendUpdatesOptIn=0 -F ShoutoutCommentNotify=0 -F Submit=Save"
+
+result=`bash page-browse $username $password $URL_EDITACCOUNT_TAB_NOTIFY $curl_notify -L`

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+
+dirs=`ls -d $DIR_PICTURES/*/`
+
+for dir in $dirs
+{
+	insert=`$MYSQL_STRING -N -e "insert ignore into pictures(path) values ('$dir');"`
+}
+
+path=""
+
+while [ ! "$path" ]
+do	
+	path=`$MYSQL_STRING -N -e "select path from pictures where hits=0 order by rand() limit 1;"`
+
+	if [ ! "$path" ]
+	then
+		update=`$MYSQL_STRING -N -e "update pictures set hits=0;"`
+	fi	
+done
+
+update=`$MYSQL_STRING -N -e "update pictures set hits=1 where path='$path';"`
+
+bash photo-upload $username $password $path*
+

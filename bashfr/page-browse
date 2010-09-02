@@ -1,0 +1,55 @@
+#!/bin/bash
+
+source settings
+source constants
+
+username=$1; shift
+password=$1; shift
+url=$1; shift
+param=$@; shift
+
+cookies=$username
+
+function login
+{
+	bash user-login $username $password
+}
+
+function browse
+{
+	url=$1; shift
+	param=$@; shift
+	
+	result=`curl $DEBUG_MODE -j $param -b $cookies -c $cookies --url $url`
+
+	echo $result
+}
+
+function page-browse
+{
+	url=$1; shift
+	param=$@; shift
+
+	if [ ! -f "$cookies" ]
+		then
+		login
+		page-browse $url $param
+	else
+		friendster_auth_v2=`cat $cookies | grep "friendster_auth_v2	uid"`
+
+		if [ "$friendster_auth_v2" ]
+		then
+			browse $url $param
+		else
+			let ERRORS++
+
+			if [ "$ERRORS" -lt "$MAX_ERRORS" ]
+				then
+				login
+				page-browse $url $param
+			fi
+		fi
+	fi
+}
+
+page-browse $url $param
